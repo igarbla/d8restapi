@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.page {
+
+}
+.page__header {
+  color: white;
+  background-color: lightblue;
+  padding: 1rem 0.5rem;
+}
+.page__title {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+
+  padding: 1rem;
+}

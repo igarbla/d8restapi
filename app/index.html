@@ -6,22 +6,25 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script defer src="app.js"></script>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <div id="app" class="page">
+      <header class="page__header">
+        <h1 class="page__title">Coches &mdash; Drupal 8 REST API</h1>
+      </header>
+      <main>
+        <ul style="list-style: none" class="list">
+          <li v-for="coche in coches" class="list__item">
+            <span>Matrícula: </span>{{ coche.field_matricula }}<br/>
+            <span>Color: </span>{{ coche.field_color }}<br/>
+            <span>Kilómetros: </span>{{ coche.field_kilometros }}<br/>
+            <span>Propietario: </span>{{ coche.field_propietario }}<br/>
+            <img v-bind:src="absoluteUrl(coche.field_foto)" width="400" height="400"/>
+          </li>
+        </ul>
+      </main>
 
-    <div id="app">
-      <h3>API</h3>
-      <ul style="list-style: none">
-        <li v-for="coche in coches">
-          <span>Matrícula: </span>{{ coche.field_matricula }}<br/>
-          <span>Color: </span>{{ coche.field_color }}<br/>
-          <span>Kilómetros: </span>{{ coche.field_kilometros }}<br/>
-          <span>Propietario: </span>{{ coche.field_propietario }}<br/>
-          <img v-bind:src="absoluteUrl(coche.field_foto)"/>
-          <hr>
-        </li>
-      </ul>
     </div>
-
   </body>
 </html>
