@@ -27,24 +27,73 @@
               v-model="filtro.matricula"
               @input="filterCoches">
 
-            <fieldset>
-              <legend>Color</legend>
+            <label for="colorFilter">Color</label>
+            <input
+              type="checkbox"
+              id="colorFilter"
+              name="colorFilter"
+              value="false"
+              v-model="colorFilter"
+              @change="filterCoches">
 
-              <input type="radio" id="blanco" name="color" />
-              <label for="blanco">Blanco</label>
+            <fieldset v-if="colorFilter">
+              <label for="blanco">
+                <input
+                  type="radio"
+                  id="blanco"
+                  name="color"
+                  value="blanco"
+                  v-model="filtro.color"
+                  @change="filterCoches" />Blanco
+              </label>
 
-              <input type="radio" id="gris" name="color" />
-              <label for="gris">Gris</label>
+              <label for="gris">
+                <input
+                  type="radio"
+                  id="gris"
+                  name="color"
+                  value="gris"
+                  v-model="filtro.color"
+                  @change="filterCoches" />Gris
+              </label>
 
-              <input type="radio" id="rojo" name="color" />
-              <label for="rojo">Rojo</label>
+              <label for="rojo">
+              <input
+                type="radio"
+                id="rojo"
+                name="color"
+                value="rojo"
+                v-model="filtro.color"
+                @change="filterCoches" />Rojo
+              </label>
+
             </fieldset>
+
+            <label for="propietario">Propietario</label>
+            <input
+              type="text"
+              id="propietario"
+              name="propietario"
+              v-model="filtro.propietario"
+              @input="filterCoches">
+
+            <label for="kilometros">Kilometros</label>
+            <input
+              type="range"
+              id="kilometros"
+              min="0"
+              max="2000000"
+              value="1000000"
+              step="10000"
+              v-model="filtro.kilometros"
+              @input="filterCoches">
 
           </form>
         </section>
         <section v-if="loaded">
           <p>Total coches: {{ total }}</p>
           <p v-if="total">Página {{ this.pagina.current }} / {{ paginas }}</p>
+          <p>Kilometros: {{ filtro.kilometros }}</p>
           <button type="button" name="button" @click="previousPage" v-if="previous">Anterior</button>
           <button type="button" name="button" @click="nextPage" v-if="next">Siguiente</button>
           <ul class="list">

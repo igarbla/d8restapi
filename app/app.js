@@ -33,9 +33,12 @@ var app = new Vue({
       next: true,
       previous: false
     },
+    colorFilter: false,
     filtro: {
       matricula: '',
-      color: ''
+      color: '',
+      propietario: '',
+      kilometros: 0
     }
   },
   computed: {
@@ -58,6 +61,11 @@ var app = new Vue({
     },
     filterCoches() {
       this.coches_filtered = this.coches.filter(coche => coche.matricula.match(this.filtro.matricula))
+      if (this.colorFilter) {
+        this.coches_filtered = this.coches_filtered.filter(coche => coche.color.match(this.filtro.color))
+      }
+      this.coches_filtered = this.coches_filtered.filter(coche => coche.propietario.match(this.filtro.propietario))
+      this.coches_filtered = this.coches_filtered.filter(coche => parseInt(coche.kilometros) <= this.filtro.kilometros)
       this.pagina.items = this.coches_filtered.slice(0, this.pagina.numItems)
       this.pagina.current = 1
     },
@@ -83,6 +91,7 @@ var app = new Vue({
         this.coches_filtered = this.coches
         this.pagina.items = this.coches_filtered.slice(0, this.pagina.numItems)
         this.loaded = true
+        this.filterCoches()
       })
   }
 })
