@@ -33,7 +33,10 @@ var app = new Vue({
       next: true,
       previous: false
     },
-    matricula: ''
+    filtro: {
+      matricula: '',
+      color: ''
+    }
   },
   computed: {
     total () {
@@ -54,7 +57,7 @@ var app = new Vue({
       return api_base_url+relativeUrl
     },
     filterCoches() {
-      this.coches_filtered = this.coches.filter(coche => coche.matricula.match(this.matricula))
+      this.coches_filtered = this.coches.filter(coche => coche.matricula.match(this.filtro.matricula))
       this.pagina.items = this.coches_filtered.slice(0, this.pagina.numItems)
       this.pagina.current = 1
     },

@@ -24,8 +24,22 @@
               type="text"
               id="matricula"
               name="matricula"
-              v-model="matricula"
-              v-on:input="filterCoches">
+              v-model="filtro.matricula"
+              @input="filterCoches">
+
+            <fieldset>
+              <legend>Color</legend>
+
+              <input type="radio" id="blanco" name="color" />
+              <label for="blanco">Blanco</label>
+
+              <input type="radio" id="gris" name="color" />
+              <label for="gris">Gris</label>
+
+              <input type="radio" id="rojo" name="color" />
+              <label for="rojo">Rojo</label>
+            </fieldset>
+
           </form>
         </section>
         <section v-if="loaded">
