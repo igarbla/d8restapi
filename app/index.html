@@ -14,15 +14,36 @@
         <h1 class="page__title">Coches &mdash; Drupal 8 REST API</h1>
       </header>
       <main>
-        <ul style="list-style: none" class="list">
-          <li v-for="coche in coches" class="list__item">
-            <span>Matrícula: </span>{{ coche.field_matricula }}<br/>
-            <span>Color: </span>{{ coche.field_color }}<br/>
-            <span>Kilómetros: </span>{{ coche.field_kilometros }}<br/>
-            <span>Propietario: </span>{{ coche.field_propietario }}<br/>
-            <img v-bind:src="absoluteUrl(coche.field_foto)" width="400" height="400"/>
-          </li>
-        </ul>
+        <section v-if="!loaded">
+          <h1>Loading data ...</h1>
+        </section>
+        <section v-if="loaded">
+          <form class="form" action="#">
+            <label for="matricula">Matrícula</label>
+            <input
+              type="text"
+              id="matricula"
+              name="matricula"
+              v-model="matricula"
+              v-on:input="filterCoches">
+          </form>
+        </section>
+        <section v-if="loaded">
+          <p>Total coches: {{ total }}</p>
+          <p v-if="total">Página {{ this.pagina.current }} / {{ paginas }}</p>
+          <button type="button" name="button" @click="previousPage" v-if="previous">Anterior</button>
+          <button type="button" name="button" @click="nextPage" v-if="next">Siguiente</button>
+          <ul class="list">
+            <coche
+              class="list__item"
+              v-for="coche in pagina.items"
+              v-bind:coche="coche"
+              v-bind:key="coche.id"
+              >
+            </coche>
+          </ul>
+        </section>
+
       </main>
 
     </div>

@@ -1,8 +1,11 @@
 version: "3"
+
 services:
   mysql:
     image: mysql:5.7
     restart: always
+    volumes:
+      - d8db:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: container
       MYSQL_DATABASE: d8
@@ -17,7 +20,11 @@ services:
       - "8080:80"
     networks:
       - webnet
+    depends_on:
+      - mysql
 
 networks:
   webnet:
 
+volumes:
+  d8db:

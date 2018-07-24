@@ -19,7 +19,23 @@
 .list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   list-style: none;
-
   padding: 1rem;
+}
+.list__item {
+  margin: 1rem;
+}
+
+.coche {
+  display: flex;
+  flex-direction: column;
+  border: solid 1px red;
+}
+.coche__meta {
+  background-color: white;
+}
+.coche__foto {
+  width: 200px;
+  height: 200px;
 }
