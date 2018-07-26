@@ -9,6 +9,7 @@
         type="text"
         id="matricula"
         name="matricula"
+        ref="matricula"
         v-model="filter.matricula">
 
       <div>
@@ -123,6 +124,9 @@ export default {
       let result = thousands.join(ts).split('').reverse().join('')
       return result
     }
+  },
+  mounted () {
+    this.$refs.matricula.focus()
   }
 }
 </script>
