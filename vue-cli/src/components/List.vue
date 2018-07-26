@@ -134,6 +134,7 @@ export default {
   background-color: #eee;
   h1 {
     margin-bottom: 1rem;
+    text-align: center;
   }
 }
 .list__meta {
