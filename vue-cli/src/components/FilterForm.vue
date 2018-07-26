@@ -73,7 +73,7 @@
         v-model="filter.propietario">
 
         <button
-          type="button"
+          type="submit"
           name="button"
           @click.prevent="filterList">Buscar</button>
     </form>
