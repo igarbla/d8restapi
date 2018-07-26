@@ -2,10 +2,13 @@
   <div class="list">
     <header class="list__header">
       <h1>{{ totalItems }} {{ totalItems | pluralize("coche") }} {{ totalItems | pluralize("encontrado") }}</h1>
-      <p>Matrícula: {{ this.filter.matricula }}</p>
-      <p>Color: <span v-if="this.filter.filterColor">{{ this.filter.color }}</span></p>
-      <p>Kilómetros: {{ this.filter.kilometros | formatNumber }} kms.</p>
-      <p>Propietario: {{ this.filter.propietario }}</p>
+      <div class="list__meta">
+        <p>Matrícula: <span>{{ this.filter.matricula }}</span></p>
+        <p>Color: <span v-if="this.filter.filterColor">{{ this.filter.color }}</span></p>
+        <p>Kilómetros: <span>{{ this.filter.kilometros | formatNumber }} kms.</span></p>
+        <p>Propietario: <span>{{ this.filter.propietario }}</span></p>
+      </div>
+      <button type="button" name="button" @click="$emit('newSearch')">Nueva búsqueda</button>
     </header>
 
     <section class="list__paginator">
@@ -84,7 +87,6 @@ export default {
   },
   filters: {
     formatNumber(number) {
-      console.log(number);
       if (isNaN(number)) {
         return
       }
@@ -115,16 +117,36 @@ export default {
 
 <style lang="scss" scoped>
 .list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 1rem;
   font-family: monospace;
 }
 .list__header {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
   padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #eee;
   h1 {
-    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
+.list__meta {
+  margin-bottom: 1rem;
+  p {
+    span {
+      font-weight: bold;
+    }
   }
 }
 .list__paginator {
+  width: 100%;
   display: flex;
   justify-content: space-around;
   padding: 1rem;
@@ -133,6 +155,7 @@ export default {
   text-align: center;
 }
 .list__content {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

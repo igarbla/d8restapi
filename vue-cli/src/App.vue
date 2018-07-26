@@ -6,13 +6,14 @@
         <h1>Loading ...</h1>
       </div>
       <filter-form
-        v-if="dataLoaded"
+        v-if="dataLoaded && searching"
         :list="list"
         @filtered="showList($event)"></filter-form>
       <list
-        v-if="dataLoaded"
+        v-if="dataLoaded && !searching"
         :list="filteredList"
-        :filter="filter"></list>
+        :filter="filter"
+        @newSearch="searching=true"></list>
     </main>
   </div>
 </template>
@@ -28,6 +29,7 @@ export default {
   data () {
     return {
       dataLoaded: false,
+      searching: true,
       list: [],
       filteredList: [],
       filter: {}
@@ -40,9 +42,9 @@ export default {
   },
   methods: {
     showList(data) {
-      //console.log(data)
       this.filteredList = data[0]
       this.filter = data[1]
+      this.searching = false
     }
   },
   created () {

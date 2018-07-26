@@ -142,6 +142,7 @@ export default {
   form {
     display: flex;
     flex-direction: column;
+    width: 320px;
   }
   label {
     margin-bottom: 0.25rem;
