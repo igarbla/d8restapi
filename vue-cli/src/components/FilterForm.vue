@@ -88,7 +88,7 @@ export default {
         matricula: '',
         filterColor: false,
         color: '',
-        kilometros: 0,
+        kilometros: 2000000,
         propietario: ''
       }
     }
