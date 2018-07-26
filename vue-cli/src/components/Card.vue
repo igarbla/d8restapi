@@ -4,10 +4,10 @@
       :src="absoluteUrl"
       class="card__image">
     <div class="card__meta">
-      <p><span>Matrícula: </span>{{ item.matricula}}</p>
-      <p><span>Color: </span>{{ item.color }}</p>
-      <p><span>Kilómetros: </span>{{ item.kilometros | formatNumber }} kms.</p>
-      <p><span>Propietario: </span>{{ item.propietario }}</p>
+      <p>Matrícula: <span>{{ item.matricula}}</span></p>
+      <p>Color: <span>{{ item.color }}</span></p>
+      <p>Kilómetros: <span>{{ item.kilometros | formatNumber }} kms.</span></p>
+      <p>Propietario: <span>{{ item.propietario }}</span></p>
     </div>
   </div>
 </template>
@@ -45,10 +45,10 @@ export default {
   width: 90%;
   margin: 0.5rem auto;
   p {
-    font-weight: bold;
+    text-transform: uppercase;
     span {
-      font-weight: normal;
-      text-transform: uppercase;
+      font-weight: bold;
+      text-transform: none;
     }
   }
 }

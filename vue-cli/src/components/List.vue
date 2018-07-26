@@ -39,7 +39,6 @@
         :disabled="hasPreviousPage !== true"
         @click="previousPage">Anterior</button>
       <div class="list__info">
-        <p>Total coches: {{ totalItems }}</p>
         <p>Página {{ currentPage }} / {{ totalPages }}</p>
       </div>
       <button
@@ -140,8 +139,10 @@ export default {
 .list__meta {
   margin-bottom: 1rem;
   p {
+    text-transform: uppercase;
     span {
       font-weight: bold;
+      text-transform: none;
     }
   }
 }
