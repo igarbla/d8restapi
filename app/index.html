@@ -93,7 +93,7 @@
         <section v-if="loaded">
           <p>Total coches: {{ total }}</p>
           <p v-if="total">Página {{ this.pagina.current }} / {{ paginas }}</p>
-          <p>Kilometros: {{ filtro.kilometros }}</p>
+          <p>Kilometros: {{ filtro.kilometros | formatNumber }}</p>
           <button type="button" name="button" @click="previousPage" v-if="previous">Anterior</button>
           <button type="button" name="button" @click="nextPage" v-if="next">Siguiente</button>
           <ul class="list">
