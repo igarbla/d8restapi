@@ -2,17 +2,20 @@
   <div class="list">
     <header class="list__header">
       <h1>{{ totalItems }} {{ totalItems | pluralize("coche") }} {{ totalItems | pluralize("encontrado") }}</h1>
+      <p>Matrícula: {{ this.filter.matricula }}</p>
+      <p>Color: <span v-if="this.filter.filterColor">{{ this.filter.color }}</span></p>
+      <p>Kilómetros: {{ this.filter.kilometros | formatNumber }} kms.</p>
+      <p>Propietario: {{ this.filter.propietario }}</p>
     </header>
+
     <section class="list__paginator">
       <button
         type="button"
         :disabled="hasPreviousPage !== true"
         @click="previousPage">Anterior</button>
-
       <div class="list__info">
         <p>Página {{ currentPage }} / {{ totalPages }}</p>
       </div>
-
       <button
         type="button"
         :disabled="hasNextPage !== true"
@@ -32,12 +35,10 @@
         type="button"
         :disabled="hasPreviousPage !== true"
         @click="previousPage">Anterior</button>
-
       <div class="list__info">
         <p>Total coches: {{ totalItems }}</p>
         <p>Página {{ currentPage }} / {{ totalPages }}</p>
       </div>
-
       <button
         type="button"
         :disabled="hasNextPage !== true"
@@ -60,7 +61,7 @@ export default {
   components: {
     'card': Card
   },
-  props: ['list'],
+  props: ['list', 'filter'],
   computed: {
     totalItems () {
       (this.list.length) ? this.currentPage = 1 : this.currentPage = 0
@@ -83,6 +84,10 @@ export default {
   },
   filters: {
     formatNumber(number) {
+      console.log(number);
+      if (isNaN(number)) {
+        return
+      }
       let ts = "."
       let reverse = number.toString().split('').reverse().join('')
       let thousands = reverse.match(/\d{1,3}/g)

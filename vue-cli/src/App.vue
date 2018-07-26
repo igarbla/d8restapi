@@ -2,8 +2,17 @@
   <div class="wrapper">
     <site-header></site-header>
     <main>
-      <filter-form v-if="dataLoaded" :list="list" @filtered="showList($event)"></filter-form>
-      <list v-if="dataLoaded" :list="filteredList"></list>
+      <div v-if="!dataLoaded" class="loading">
+        <h1>Loading ...</h1>
+      </div>
+      <filter-form
+        v-if="dataLoaded"
+        :list="list"
+        @filtered="showList($event)"></filter-form>
+      <list
+        v-if="dataLoaded"
+        :list="filteredList"
+        :filter="filter"></list>
     </main>
   </div>
 </template>
@@ -20,7 +29,8 @@ export default {
     return {
       dataLoaded: false,
       list: [],
-      filteredList: []
+      filteredList: [],
+      filter: {}
     }
   },
   components: {
@@ -30,11 +40,9 @@ export default {
   },
   methods: {
     showList(data) {
-      this.filteredList = data
-    },
-    changeComponent (component) {
-      this.cmpProps = []
-      this.selectedComponent = component
+      //console.log(data)
+      this.filteredList = data[0]
+      this.filter = data[1]
     }
   },
   created () {
@@ -42,7 +50,7 @@ export default {
     .get('http://localhost:8080/api/coche')
     .then(response => {
       this.list = response.data
-      this.filteredList = this.list
+      //this.filteredList = this.list
       this.dataLoaded = true
     })
   }
@@ -58,5 +66,12 @@ export default {
   .wrapper {
     display: flex;
     flex-direction: column;
+  }
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: calc(100vh - 116px);
   }
 </style>

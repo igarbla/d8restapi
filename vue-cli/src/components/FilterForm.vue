@@ -12,13 +12,49 @@
         v-model="filter.matricula">
 
       <div>
-      <label for="filterColor">Color</label>
-      <input
-        type="checkbox"
-        id="filterColor"
-        name="filterColor"
-        v-model="filter.filterColor">
+        <label for="filterColor">Color</label>
+        <input
+          type="checkbox"
+          id="filterColor"
+          name="filterColor"
+          v-model="filter.filterColor"
+          @change="resetColor">
       </div>
+      <fieldset v-if="filter.filterColor">
+        <div>
+          <label for="blanco" title="Blanco">
+            <div class="color blanco"></div>
+            Blanco</label>
+          <input
+            id="blanco"
+            type="radio"
+            name="color"
+            value="blanco"
+            v-model="filter.color">
+        </div>
+        <div>
+          <label for="gris" title="Gris">
+            <div class="color gris"></div>
+            Gris</label>
+            <input
+              id="gris"
+              type="radio"
+              name="color"
+              value="gris"
+              v-model="filter.color">
+        </div>
+        <div>
+          <label for="rojo" title="Rojo">
+            <div class="color rojo"></div>
+            Rojo</label>
+        <input
+          id="rojo"
+          type="radio"
+          name="color"
+          value="rojo"
+          v-model="filter.color">
+        </div>
+      </fieldset>
 
       <label for="kilometros">Kilómetros: {{ filter.kilometros | formatNumber }} kms</label>
       <input
@@ -61,9 +97,9 @@ export default {
   computed: {
     filteredList () {
       let subset = this.list.filter(item => item.matricula.match(this.filter.matricula))
-      // if (filterColor) {
-      //   subset = subset.filter(item => item.color == this.filter.color)
-      // }
+      if (this.filter.filterColor) {
+        subset = subset.filter(item => item.color == this.filter.color)
+      }
       subset = subset.filter(item => parseInt(item.kilometros) <= this.filter.kilometros)
       subset = subset.filter(item => item.propietario.match(this.filter.propietario))
       return subset
@@ -71,7 +107,12 @@ export default {
   },
   methods: {
     filterList () {
-      this.$emit('filtered', this.filteredList)
+      this.$emit('filtered', [this.filteredList, this.filter])
+    },
+    resetColor () {
+      if (!this.filter.filterColor) {
+        this.filter.color = 'blanco'
+      }
     }
   },
   filters: {
@@ -86,7 +127,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
   section {
     font-family: monospace;
     display: flex;
@@ -113,6 +154,35 @@ export default {
   input[type="range"] {
     width: 100%;
     border: 1px solid #ccc;
+  }
+  fieldset {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    div {
+      display: flex;
+      justify-content: space-between;
+    }
+    label, input {
+      margin: 0;
+    }
+    .color {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      border: 1px solid #333;
+      border-radius: 50%;
+    }
+    .blanco {
+      background-color: white;
+    }
+    .gris {
+      background-color: gray;
+    }
+    .rojo {
+      background-color: red;
+    }
   }
   button {
     padding: 0.5rem 1rem;
