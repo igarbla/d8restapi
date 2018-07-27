@@ -25,7 +25,7 @@ Drupal 8 REST API Test
 ## Datos Drupal
 
 Para acceder al sitio Drupal:
-```bash
+```
 Usuario: admin
 Clave: admin
 ```
