@@ -3,9 +3,9 @@ Drupal 8 REST API Test
 
 ## Requisitos
 
-- Tener instalado Docker `https://docs.docker.com/install/#server`
-- Tener instalado Docker Compose `https://docs.docker.com/compose/install/`
-- Tener instalado Node `https://nodejs.org/en/`
+- Tener instalado Docker https://docs.docker.com/install/#server
+- Tener instalado Docker Compose https://docs.docker.com/compose/install/
+- Tener instalado Node https://nodejs.org/en/
 
 ## Instalación Drupal
 
@@ -20,13 +20,15 @@ Drupal 8 REST API Test
 - Entrar en el directorio `vue-cli`
 - Ejecutar `npm install`
 - Ejecutar `npm run dev`
-- El cliente está disponible en *http://localhost:8081"
+- El cliente está disponible en http://localhost:8081
 
 ## Datos Drupal
 
 Para acceder al sitio Drupal:
+`
     Usuario: admin
     Clave: admin
+`
     
 Para acceder al servidor web `docker exec -it WEB_CONTAINER /bin/bash` y obtener una sesión interactiva.
 
@@ -35,8 +37,9 @@ Para acceder al servidor web `docker exec -it WEB_CONTAINER /bin/bash` y obtener
 ## Terminar
 
 Para terminar ejecutamos
+`
     docker-compose kill
     docker rm WEB_CONTAINER
     docker rm MYSQL_CONTAINER
     docker volume prune
-    
+ `   
