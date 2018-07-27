@@ -25,10 +25,10 @@ Drupal 8 REST API Test
 ## Datos Drupal
 
 Para acceder al sitio Drupal:
-`
-    Usuario: admin
-    Clave: admin
-`
+```bash
+Usuario: admin
+Clave: admin
+```
     
 Para acceder al servidor web `docker exec -it WEB_CONTAINER /bin/bash` y obtener una sesión interactiva.
 
