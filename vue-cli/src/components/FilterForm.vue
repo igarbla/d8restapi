@@ -30,7 +30,7 @@
             id="blanco"
             type="radio"
             name="color"
-            value="blanco"
+            value="white"
             v-model="filter.color">
         </div>
         <div>
@@ -41,7 +41,7 @@
               id="gris"
               type="radio"
               name="color"
-              value="gris"
+              value="gray"
               v-model="filter.color">
         </div>
         <div>
@@ -52,7 +52,7 @@
           id="rojo"
           type="radio"
           name="color"
-          value="rojo"
+          value="red"
           v-model="filter.color">
         </div>
       </fieldset>
@@ -76,43 +76,58 @@
         <button
           type="submit"
           name="button"
-          @click.prevent="filterList">Buscar</button>
+          @click.prevent="search">Buscar</button>
     </form>
   </section>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data () {
     return {
       filter: {
-        matricula: '',
+        matricula: null,
         filterColor: false,
-        color: '',
-        kilometros: 2000000,
-        propietario: ''
-      }
-    }
-  },
-  props: ['list'],
-  computed: {
-    filteredList () {
-      let subset = this.list.filter(item => item.matricula.match(this.filter.matricula))
-      if (this.filter.filterColor) {
-        subset = subset.filter(item => item.color == this.filter.color)
-      }
-      subset = subset.filter(item => parseInt(item.kilometros) <= this.filter.kilometros)
-      subset = subset.filter(item => item.propietario.match(this.filter.propietario))
-      return subset
+        color: null,
+        kilometros: 0,
+        propietario: null
+      },
+      list: []
     }
   },
   methods: {
-    filterList () {
-      this.$emit('filtered', [this.filteredList, this.filter])
+    search () {
+      let url = 'http://localhost:8080/api/coche?'
+      let filter = []
+      if (this.filter.matricula) {
+        filter.push('matricula=' + this.filter.matricula)
+      }
+      if (this.filter.color) {
+        filter.push('color=' + this.filter.color)
+      }
+      if (this.filter.kilometros) {
+        filter.push('kms=' + this.filter.kilometros)
+      }
+      if (this.filter.propietario) {
+        filter.push('propietario=' + this.filter.propietario)
+      }
+      filter = filter.filter(item => item)
+      filter = filter.join('&')
+      url += filter
+      console.log(url)
+      axios
+      .get(url)
+      .then(response => {
+        this.list = response.data
+        console.log(this.list)
+        this.$emit('filtered', [this.list, this.filter])
+      })
     },
     resetColor () {
       if (!this.filter.filterColor) {
-        this.filter.color = 'blanco'
+        this.filter.color = 'white'
       }
     }
   },

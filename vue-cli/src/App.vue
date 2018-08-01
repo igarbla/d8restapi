@@ -2,16 +2,12 @@
   <div class="wrapper">
     <site-header></site-header>
     <main>
-      <div v-if="!dataLoaded" class="loading">
-        <h1>Loading ...</h1>
-      </div>
       <filter-form
-        v-if="dataLoaded && searching"
-        :list="list"
+        v-if="searching"
         @filtered="showList($event)"></filter-form>
       <list
-        v-if="dataLoaded && !searching"
-        :list="filteredList"
+        v-if="!searching"
+        :list="list"
         :filter="filter"
         @newSearch="searching=true"></list>
     </main>
@@ -28,10 +24,9 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      dataLoaded: false,
+      //dataLoaded: false,
       searching: true,
       list: [],
-      filteredList: [],
       filter: {}
     }
   },
@@ -42,19 +37,13 @@ export default {
   },
   methods: {
     showList(data) {
-      this.filteredList = data[0]
+      this.list = data[0]
       this.filter = data[1]
       this.searching = false
     }
   },
   created () {
-    axios
-    .get('http://localhost:8080/api/coche')
-    .then(response => {
-      this.list = response.data
-      //this.filteredList = this.list
-      this.dataLoaded = true
-    })
+    
   }
 }
 </script>
