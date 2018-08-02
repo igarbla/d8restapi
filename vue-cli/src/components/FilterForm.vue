@@ -116,12 +116,12 @@ export default {
       filter = filter.filter(item => item)
       filter = filter.join('&')
       url += filter
-      console.log(url)
+      console.log(this.filter.kilometros)
       axios
       .get(url)
       .then(response => {
         this.list = response.data
-        console.log(this.list)
+        //console.log(this.list)
         this.$emit('filtered', [this.list, this.filter])
       })
     },
